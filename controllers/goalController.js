@@ -12,10 +12,21 @@ exports.findAll = async (req, res) => {
 };
 
 exports.updateOne = async (req, res) => {
-  const goal = await Goal.findByIdAndUpdate(req.params.id, req.body, {
-    new: true
-  });
-  res.json(goal);
+  if (req.body.datesCompleted) {
+    const goalWithDate = await Goal.findByIdAndUpdate(
+      req.params.id,
+      {
+        $push: { datesCompleted: Date.now() }
+      },
+      { new: true }
+    );
+    res.json(goalWithDate);
+  } else {
+    const goal = await Goal.findByIdAndUpdate(req.params.id, req.body, {
+      new: true
+    });
+    res.json(goal);
+  }
 };
 
 exports.findOne = async (req, res) => {

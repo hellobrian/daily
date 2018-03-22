@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <button class="btn--completed">Mark Completed!</button>
+  <button class="btn--other">Update other stuff!</button>
+</body>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script>
+  var completedButton = document.querySelector('.btn--completed');
+  var updateOtherDataButton = document.querySelector('.btn--other');
+
+  completedButton.addEventListener('click', (event) => {
+    axios.patch('/api/goals/5ab42226ccce4f50aa31f957', {
+      datesCompleted: Date.now()
+    }).then(res => console.log(res.data))
+  })
+
+  updateOtherDataButton.addEventListener('click', (event) => {
+    axios.patch('/api/goals/5ab42226ccce4f50aa31f957', {
+      archived: true
+    }).then(res => console.log(res.data))
+  })
+
+
+</script>
+
+</html>
