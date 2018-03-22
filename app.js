@@ -7,7 +7,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.get('/', (req, res) => {
-  res.json({ ok: true });
+  res.redirect('/api');
 });
 
 app.use('/api', routes);
