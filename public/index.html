@@ -19,7 +19,7 @@
 
   completedButton.addEventListener('click', (event) => {
     axios.patch('/api/goals/5ab55387437e200ae37c30a9', {
-      datesCompleted: Date.now()
+      completedDates: Date.now()
     }).then(res => console.log(res.data))
   })
 

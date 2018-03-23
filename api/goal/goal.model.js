@@ -15,7 +15,7 @@ const goalSchema = new mongoose.Schema(
       type: Boolean,
       default: false
     },
-    datesCompleted: [{ type: Date, default: Date.now }]
+    completedDates: [{ type: Date, default: Date.now }]
   },
   {
     toJSON: { virtuals: true },
@@ -24,7 +24,7 @@ const goalSchema = new mongoose.Schema(
 );
 
 goalSchema.virtual('streakCurrent').get(function() {
-  return this.datesCompleted.length;
+  return this.completedDates.length;
 });
 
 module.exports = mongoose.model('Goal', goalSchema);

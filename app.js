@@ -1,6 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const routes = require('./routes/index');
+const goalApiRoutes = require('./api/goal/goal.routes');
 const app = express();
 const path = require('path');
 
@@ -13,6 +13,6 @@ app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
-app.use('/api', routes);
+app.use('/api/goals', goalApiRoutes);
 
 module.exports = app;
