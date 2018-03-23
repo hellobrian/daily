@@ -18,13 +18,13 @@
   var updateOtherDataButton = document.querySelector('.btn--other');
 
   completedButton.addEventListener('click', (event) => {
-    axios.patch('/api/goals/5ab42226ccce4f50aa31f957', {
+    axios.patch('/api/goals/5ab55387437e200ae37c30a9', {
       datesCompleted: Date.now()
     }).then(res => console.log(res.data))
   })
 
   updateOtherDataButton.addEventListener('click', (event) => {
-    axios.patch('/api/goals/5ab42226ccce4f50aa31f957', {
+    axios.patch('/api/goals/5ab55387437e200ae37c30a9', {
       archived: true
     }).then(res => console.log(res.data))
   })
