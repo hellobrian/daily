@@ -1,19 +1,19 @@
 const mongoose = require('mongoose');
-const Goal = require('./goal.model');
+const Habit = require('./habit.model');
 
 exports.createOne = async (req, res) => {
-  const goal = await new Goal(req.body).save();
-  res.json(goal);
+  const habit = await new Habit(req.body).save();
+  res.json(habit);
 };
 
 exports.findAll = async (req, res) => {
-  const goals = await Goal.find();
-  res.json(goals);
+  const habits = await Habit.find();
+  res.json(habits);
 };
 
 exports.findOne = async (req, res) => {
-  const goal = await Goal.findOne({ _id: req.params.id });
-  res.json(goal);
+  const habit = await Habit.findOne({ _id: req.params.id });
+  res.json(habit);
 };
 
 exports.updateOne = async (req, res, next) => {
@@ -21,17 +21,17 @@ exports.updateOne = async (req, res, next) => {
     console.log('date should be updated! calling next!');
     return next();
   }
-  const goal = await Goal.findOneAndUpdate({ _id: req.params.id }, req.body, {
+  const habit = await Habit.findOneAndUpdate({ _id: req.params.id }, req.body, {
     new: true
   });
-  res.json(goal);
+  res.json(habit);
 };
 
 exports.updateCompletedDates = async (req, res) => {
-  const goal = await Goal.findOneAndUpdate(
+  const habit = await Habit.findOneAndUpdate(
     { _id: req.params.id },
     { $push: { completedDates: req.body.completedDates } },
     { new: true }
   );
-  res.json(goal);
+  res.json(habit);
 };

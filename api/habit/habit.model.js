@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const goalSchema = new mongoose.Schema(
+const habitSchema = new mongoose.Schema(
   {
     name: {
       type: String,
@@ -23,8 +23,8 @@ const goalSchema = new mongoose.Schema(
   }
 );
 
-goalSchema.virtual('streakCurrent').get(function() {
+habitSchema.virtual('streakCurrent').get(function() {
   return this.completedDates.length;
 });
 
-module.exports = mongoose.model('Goal', goalSchema);
+module.exports = mongoose.model('Habit', habitSchema);

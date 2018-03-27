@@ -4,18 +4,23 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "NODE_ENV=production node ./start.js",
-    "watch": "nodemon ./start.js",
+    "build": "next build",
+    "dev": "node ./server.js",
+    "start": "NODE_ENV=production node ./server.js",
     "deploy": "now --public --dotenv='.env'"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "axios": "~0.18.0",
     "body-parser": "~1.18.2",
     "dotenv": "~5.0.1",
     "express": "~4.16.3",
-    "mongoose": "~5.0.11"
+    "mongoose": "~5.0.11",
+    "next": "~5.1.0",
+    "react": "~16.2.0",
+    "react-dom": "~16.2.0"
   },
   "devDependencies": {
     "nodemon": "~1.17.2"
