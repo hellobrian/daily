@@ -15,7 +15,11 @@ const habitSchema = new mongoose.Schema(
       type: Boolean,
       default: false
     },
-    completedDates: [{ type: Date, default: Date.now }]
+    completedDates: [{ type: Date, default: Date.now }],
+    daysPerWeek: {
+      type: Number,
+      default: 3
+    }
   },
   {
     toJSON: { virtuals: true },

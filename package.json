@@ -2,12 +2,12 @@
   "name": "daily-app",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
     "build": "next build",
-    "dev": "node ./server.js",
-    "start": "NODE_ENV=production node ./server.js",
-    "deploy": "now --public --dotenv='.env'"
+    "dev": "node server.js",
+    "start": "NODE_ENV=production node server.js",
+    "deploy": "now --public --dotenv"
   },
   "keywords": [],
   "author": "",
@@ -21,8 +21,5 @@
     "next": "~5.1.0",
     "react": "~16.2.0",
     "react-dom": "~16.2.0"
-  },
-  "devDependencies": {
-    "nodemon": "~1.17.2"
   }
 }
