@@ -2,11 +2,12 @@
   "name": "daily-app",
   "version": "1.0.0",
   "description": "",
-  "main": "server.js",
+  "main": "start.js",
   "scripts": {
     "build": "next build",
-    "dev": "node server.js",
-    "start": "NODE_ENV=production node server.js",
+    "dev": "node start.js",
+    "prestart": "npm run build",
+    "start": "NODE_ENV=production node start.js",
     "deploy": "now --public --dotenv"
   },
   "keywords": [],

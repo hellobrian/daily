@@ -10,7 +10,7 @@ habitApiRouter
 habitApiRouter
   .route('/:id')
   .get(habitController.findOne)
-  .patch(habitController.updateOne)
-  .patch(habitController.updateCompletedDates);
+  .patch(habitController.updateOne);
+// .patch(habitController.updateCompletedDates);
 
 module.exports = habitApiRouter;

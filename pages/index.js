@@ -11,39 +11,43 @@ const Habit = ({ onClick, children, ...other }) => {
 };
 
 class Index extends React.Component {
-  static getInitialProps = async ({ req, res }) => {
-    // check if https or http from request headers
-    const protocol = req.headers['x-forwarded-proto'] || 'http';
-    // get host from request headers
-    const host = req.headers.host;
+  state = {
+    loading: true,
+    habits: []
+  };
 
-    const habits = await axios
-      .get(`${protocol}://${host}/api/habits`)
-      .then((response) => response.data)
+  componentDidMount() {
+    axios
+      .get(`/api/habits`)
+      .then((response) =>
+        this.setState({ loading: false, habits: response.data })
+      )
       .catch((err) => {
         console.error(err);
       });
-
-    return { habits, host, protocol };
-  };
+  }
 
   markCompleted = (id) => {
     return axios
-      .patch(`${this.props.protocol}://${this.props.host}/api/habits/${id}`, {
+      .patch(`/api/habits/${id}`, {
+        name: `new name ${Date.now()}`,
         completedDates: Date.now()
       })
       .then((res) => console.log(res.data));
   };
 
   render() {
-    return (
+    const { loading, habits } = this.state;
+    return loading ? (
+      <p>Loading...</p>
+    ) : (
       <Fragment>
         <pre>
-          <code>{JSON.stringify(this.props.habits, null, 2)}</code>
+          <code>{JSON.stringify(habits, null, 2)}</code>
         </pre>
         <h1>hi</h1>
         <ul>
-          {this.props.habits.map((habit) => (
+          {habits.map((habit) => (
             <Habit
               key={habit._id}
               onClick={() => this.markCompleted(habit._id)}
