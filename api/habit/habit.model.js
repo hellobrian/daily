@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-const isToday = require('date-fns/is_today');
 
 const habitSchema = new mongoose.Schema(
   {
@@ -16,7 +15,7 @@ const habitSchema = new mongoose.Schema(
       type: Boolean,
       default: false
     },
-    completedDates: [{ type: Date, default: Date.now }],
+    completedDates: [{ type: Date }],
     daysPerWeek: {
       type: Number,
       default: 0

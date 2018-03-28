@@ -21,18 +21,12 @@ exports.findOne = async (req, res) => {
 exports.updateOne = async (req, res, next) => {
   // Find completedDates on existing document
   const findHabit = await Habit.findOne({ _id: req.params.id });
-  const alreadyCompletedToday = findHabit.completedDates
-    .filter((date) => {
-      console.log(date);
-      return isSameDay(req.body.completedDates, date);
-    })
-    .some((date) => {
-      console.log(date);
-      return isToday(date);
-    });
+  const isCompletedToday = findHabit.completedDates
+    .filter((date) => isSameDay(req.body.completedDates, date))
+    .some((date) => isToday(date));
 
-  // // If there are existing completed dates, then
-  const updatedBody = alreadyCompletedToday
+  // If there are existing completed dates, then
+  const updatedBody = isCompletedToday
     ? {
         $set: {
           title: req.body.title
