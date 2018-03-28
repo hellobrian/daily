@@ -31,4 +31,8 @@ habitSchema.virtual('streakCurrent').get(function() {
   return this.completedDates.length;
 });
 
+habitSchema.virtual('createdDateString').get(function() {
+  return this.created.toDateString();
+});
+
 module.exports = mongoose.model('Habit', habitSchema);
