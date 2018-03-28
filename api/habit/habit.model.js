@@ -1,13 +1,14 @@
 const mongoose = require('mongoose');
+const isToday = require('date-fns/is_today');
 
 const habitSchema = new mongoose.Schema(
   {
-    name: {
+    title: {
       type: String,
       trim: true,
-      required: 'Enter a name for your goal - short and sweet!'
+      required: 'Enter a title for your goal - short and sweet!'
     },
-    created: {
+    createdAt: {
       type: Date,
       default: Date.now
     },
@@ -18,7 +19,7 @@ const habitSchema = new mongoose.Schema(
     completedDates: [{ type: Date, default: Date.now }],
     daysPerWeek: {
       type: Number,
-      default: 3
+      default: 0
     }
   },
   {
@@ -31,8 +32,8 @@ habitSchema.virtual('streakCurrent').get(function() {
   return this.completedDates.length;
 });
 
-habitSchema.virtual('createdDateString').get(function() {
-  return this.created.toDateString();
+habitSchema.virtual('createdAtDateString').get(function() {
+  return this.createdAt.toDateString();
 });
 
 module.exports = mongoose.model('Habit', habitSchema);

@@ -30,7 +30,7 @@ class Index extends React.Component {
   markCompleted = (id) => {
     return axios
       .patch(`/api/habits/${id}`, {
-        name: `new name ${Date.now()}`,
+        title: `new title ${Date.now()}`,
         completedDates: Date.now()
       })
       .then((res) => console.log(res.data));
@@ -52,7 +52,7 @@ class Index extends React.Component {
               key={habit._id}
               onClick={() => this.markCompleted(habit._id)}
             >
-              {habit.name}
+              {habit.title}
             </Habit>
           ))}
         </ul>
