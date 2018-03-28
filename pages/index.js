@@ -12,7 +12,7 @@ const Habit = ({ onClick, children, ...other }) => {
 
 class Index extends React.Component {
   state = {
-    loading: true,
+    isLoading: true,
     habits: []
   };
 
@@ -20,7 +20,7 @@ class Index extends React.Component {
     axios
       .get(`/api/habits`)
       .then((response) =>
-        this.setState({ loading: false, habits: response.data })
+        this.setState({ isLoading: false, habits: response.data })
       )
       .catch((err) => {
         console.error(err);
@@ -37,8 +37,8 @@ class Index extends React.Component {
   };
 
   render() {
-    const { loading, habits } = this.state;
-    return loading ? (
+    const { isLoading, habits } = this.state;
+    return isLoading ? (
       <p>Loading...</p>
     ) : (
       <Fragment>
