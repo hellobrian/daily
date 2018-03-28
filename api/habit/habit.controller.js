@@ -19,27 +19,30 @@ exports.findOne = async (req, res) => {
 };
 
 exports.updateOne = async (req, res, next) => {
-  // Find completedDates on existing document
-  const findHabit = await Habit.findOne({ _id: req.params.id });
-  const isCompletedToday = findHabit.completedDates
-    .filter((date) => isSameDay(req.body.completedDates, date))
-    .some((date) => isToday(date));
+  const { completedDates, title } = req.body;
 
-  // If there are existing completed dates, then
-  const updatedBody = isCompletedToday
-    ? {
-        $set: {
-          title: req.body.title
-        }
-      }
-    : {
-        $set: { title: req.body.title },
-        $push: { completedDates: req.body.completedDates }
-      };
+  /**
+   * Find the Habit document based on req.params.id
+   * Then, filter the completedDates array by dates that are the same day as req.body.completedDates
+   * And check if some or one of the dates is today
+   *
+   * returns Boolean
+   */
+  const isCompletedToday = await Habit.findOne({ _id: req.params.id }).then(
+    (habits) =>
+      habits.completedDates
+        .filter((date) => isSameDay(completedDates, date))
+        .some((date) => isToday(date))
+  );
 
+  /**
+   * If Habit has already been completed today,
+   * Then update document with req.body.title only,
+   * Else, update document with req.body.title AND push new Date to completedDates field from req.body.completedDates
+   */
   const habit = await Habit.findOneAndUpdate(
     { _id: req.params.id },
-    updatedBody,
+    isCompletedToday ? { title } : { title, $push: { completedDates } },
     { new: true }
   );
 

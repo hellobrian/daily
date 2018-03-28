@@ -30,7 +30,7 @@ class Index extends React.Component {
   markCompleted = (id) => {
     return axios
       .patch(`/api/habits/${id}`, {
-        title: `new title ${Date.now()}`,
+        title: `new title bob`,
         completedDates: Date.now()
       })
       .then((res) => console.log(res.data));
